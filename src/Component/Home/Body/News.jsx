@@ -5,7 +5,6 @@ const News = () => {
 
   const dataset = useLoaderData()
 
-  console.log(dataset.data)
   return (
     <div>
       <h2 className='text-2xl'>
@@ -27,7 +26,12 @@ const News = () => {
                 <figure className='my-3'>
                   <img src={news.image_url} alt="" />
                 </figure>
-                <p>{news.details}</p>
+                <div className="p-4">
+                  <p className="text-gray-600 mb-2">
+                    {news.details.slice(0, 300)}...{' '}
+                    <span className="text-blue-500 cursor-pointer">Read More</span>
+                  </p>
+                </div>
               </div>
             </div>
           )

@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Contex } from '../../ContexApi/Contex'
 
 const AllCategory = () => {
-  const [Categories, setCategories] = useState([])
+
+  const {contexApiData} = useContext(Contex)
+  const {Categories, setCategories} = contexApiData
+
   useEffect(() => {
     fetch("https://openapi.programming-hero.com/api/news/categories")
     .then(res => res.json())
@@ -14,11 +18,8 @@ const AllCategory = () => {
       <div className='flex flex-col my-5'>
         {
           Categories.map(category => 
-            <NavLink to={`/category/${category.category_id}`}>
-            <button 
-            key={category.category_id}
-            className='px-3 py-2 hover:bg-[#E7E7E7] text-left'
-            >{category.category_name}</button>
+            <NavLink to={`/category/${category.category_id}`} key={category.category_id}>
+            <button className='px-3 py-2 hover:bg-[#E7E7E7] w-full text-left'>{category.category_name}</button>
             </NavLink>
           )
         }
